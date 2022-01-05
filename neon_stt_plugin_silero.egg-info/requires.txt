@@ -1,0 +1,2 @@
+torch>=1.8.1
+ovos-plugin-manager>=0.0.1a7

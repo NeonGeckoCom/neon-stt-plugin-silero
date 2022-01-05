@@ -1,0 +1,9 @@
+setup.py
+neon_stt_plugin_silero/__init__.py
+neon_stt_plugin_silero.egg-info/PKG-INFO
+neon_stt_plugin_silero.egg-info/SOURCES.txt
+neon_stt_plugin_silero.egg-info/dependency_links.txt
+neon_stt_plugin_silero.egg-info/entry_points.txt
+neon_stt_plugin_silero.egg-info/requires.txt
+neon_stt_plugin_silero.egg-info/top_level.txt
+neon_stt_plugin_silero.egg-info/zip-safe

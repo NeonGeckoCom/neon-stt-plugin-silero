@@ -1,0 +1,6 @@
+torch>=1.8.1
+ovos-plugin-manager>=0.0.1a7
+neon_speech
+torchaudio>=0.10.1
+antlr4-python3-runtime>=4.8
+omegaconf>=2.1.1s
