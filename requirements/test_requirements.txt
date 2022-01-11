@@ -1,0 +1,6 @@
+neon-speech
+pytest
+pytest-timeout
+SpeechRecognition
+torchaudio
+ovos_utils>=0.0.1a7

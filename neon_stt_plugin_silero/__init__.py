@@ -1,13 +1,13 @@
 from tempfile import gettempdir
 from time import time
 import torch
-from ovos_plugin_manager.templates.stt import STT
+from neon_speech.stt import STT
 
 
 class SileroSTT(STT):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, lang, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        lang = self.config.get("lang") or "en"
+        lang = lang or "en"
         self.lang = lang.split("-")[0]
 
         # load provided utils
