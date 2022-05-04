@@ -8,7 +8,7 @@
   "stt": {
      "module": "neon-stt-plugin-silero",
      "neon-stt-plugin-silero": {
-        "model": "model.onnx"
+        "model": "engine.onnx"
      }
   }
 }
