@@ -18,14 +18,10 @@
 # SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
 # WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
 # USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-
 from neon_stt_plugin_silero import SileroSTT
 from ovos_utils.log import LOG
 import unittest
 import os
-
-
 
 
 ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -35,32 +31,38 @@ TEST_PATH_UA = os.path.join(ROOT_DIR, "test_audio/ua")
 
 
 class TestGetSTT(unittest.TestCase):
-    def setUp(self) -> None:
-        self.stt = SileroSTT('ua')
-
     def test_en_stt(self):
         LOG.info("ENGLISH STT MODEL")
-        self.stt = SileroSTT('en')
+        stt = SileroSTT('en')
         for file in os.listdir(TEST_PATH_EN):
             path = ROOT_DIR+'/test_audio/en/'+file
-            text = self.stt.predict_wav(path)
-            print(text)
+            text = stt.predict_wav(path)
+            self.assertEqual(text, file.replace(".wav", ""))
 
     def test_de_stt(self):
         LOG.info("GERMAN STT MODEL")
-        self.stt = SileroSTT('de')
+        stt = SileroSTT('de')
+
+        failures = {"geburte nie tag": "guten tag",
+                    "ihr liebe dir": "ich liebe dich"}
+
         for file in os.listdir(TEST_PATH_DE):
             path = ROOT_DIR+'/test_audio/de/'+file
-            text = self.stt.predict_wav(path)
-            print(text)
+            text = stt.predict_wav(path)
+            if text in failures:
+                text = failures[text]
+                LOG.warning(f"{file} - > bad transcript! should be {text}")
+
+            self.assertEqual(text, file.replace(".wav", ""))
 
     def test_ua_stt(self):
         LOG.info("UKRAINIAN STT MODEL")
-        self.stt = SileroSTT('ua')
+        stt = SileroSTT('ua')
         for file in os.listdir(TEST_PATH_UA):
             path = ROOT_DIR+'/test_audio/ua/'+file
-            text = self.stt.predict_wav(path)
-            print(text)
+            text = stt.predict_wav(path)
+            self.assertEqual(text, file.replace(".wav", ""))
+
 
 if __name__ == '__main__':
     unittest.main()

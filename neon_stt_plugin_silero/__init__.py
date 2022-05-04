@@ -1,7 +1,7 @@
 from tempfile import gettempdir
 from time import time
 import torch
-from neon_speech.stt import STT
+from ovos_plugin_manager.stt import STT
 
 
 class SileroSTT(STT):

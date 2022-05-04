@@ -1,5 +1,22 @@
 #!/usr/bin/env python3
 from setuptools import setup
+import os
+from setuptools import setup
+
+BASEDIR = os.path.abspath(os.path.dirname(__file__))
+
+
+def required(requirements_file):
+    """ Read requirements file and remove comments and empty lines. """
+    with open(os.path.join(BASEDIR, requirements_file), 'r') as f:
+        requirements = f.read().splitlines()
+        if 'MYCROFT_LOOSE_REQUIREMENTS' in os.environ:
+            print('USING LOOSE REQUIREMENTS!')
+            requirements = [r.replace('==', '>=').replace('~=', '>=') for r in requirements]
+        return [pkg for pkg in requirements
+                if pkg.strip() and not pkg.startswith("#")]
+
+
 
 PLUGIN_ENTRY_POINT = 'neon-stt-plugin-silero=neon_stt_plugin_silero:SileroSTT'
 setup(
@@ -11,8 +28,7 @@ setup(
     author_email='jarbasai@mailfence.com',
     license='Apache-2.0',
     packages=['neon_stt_plugin_silero'],
-    install_requires=["torch>=1.8.1",
-                      "ovos-plugin-manager>=0.0.1a7"],
+    install_requires=required("requirements/requirements.txt"),
     include_package_data=True,
     zip_safe=True,
     classifiers=[
