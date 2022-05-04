@@ -5,10 +5,9 @@ from ovos_plugin_manager.stt import STT
 
 
 class SileroSTT(STT):
-    def __init__(self, lang, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        lang = lang or "en"
-        self.lang = lang.split("-")[0]
+        self.lang = self.lang.split("-")[0]
 
         # load provided utils
         self.model, self.decoder, utils = torch.hub.load(
