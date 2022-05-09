@@ -1,4 +1,4 @@
-FROM debian:buster-slim
+FROM python:slim
 
 RUN apt-get update && \
   apt-get install -y git python3 python3-dev python3-pip curl build-essential

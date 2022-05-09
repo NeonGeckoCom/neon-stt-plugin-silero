@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
-from setuptools import setup
 import os
-from setuptools import setup
+from setuptools import setup, find_packages
 
 BASEDIR = os.path.abspath(os.path.dirname(__file__))
 
@@ -17,6 +16,13 @@ def required(requirements_file):
                 if pkg.strip() and not pkg.startswith("#")]
 
 
+def package_files(directory):
+    paths = []
+    for (path, directories, filenames) in os.walk(directory):
+        for filename in filenames:
+            paths.append(os.path.join('../../..', path, filename))
+    return paths
+
 
 PLUGIN_ENTRY_POINT = 'neon-stt-plugin-silero=neon_stt_plugin_silero:SileroSTT'
 setup(
@@ -27,7 +33,7 @@ setup(
     author='JarbasAi',
     author_email='jarbasai@mailfence.com',
     license='Apache-2.0',
-    packages=['neon_stt_plugin_silero'],
+    packages=find_packages(include=['neon*']),
     install_requires=required("requirements/requirements.txt"),
     include_package_data=True,
     zip_safe=True,
